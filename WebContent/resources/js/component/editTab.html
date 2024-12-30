@@ -1,0 +1,76 @@
+<div id="editTab" style="display:none">
+
+    <div>
+        <div class="main-title">常見問題集</div>
+        <table class="main-table" width="100%">
+            <tr>
+                <td class="center">問題標籤 <button style="border:2px red solid" id="questionQuote">引用</button></td>
+                <td>
+                    <input id="question" type="text" style="width:100%"></input>
+                </td>
+            </tr>
+            <tr>
+                <td class="center">答覆內容 <button style="border:2px red solid" id="answerQuote">引用</button></td>
+                <td>
+                    <textarea id="answer" row="3" rows="7" cols="70"></textarea>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="center">查詢相關關鍵字 <button style="border:2px red solid" id="keywordQuote">引用</button>
+                </td>
+                <td><input id="keyword"></td>
+            </tr>
+
+            <tr>
+                <td class="center">是否同步至內政部網站<button style="border:2px red solid" id="isPublicQuote">引用</button>
+                </td>
+                <td>
+                    <select id="isPublic">
+                        <option value=""></option>
+                        <option value="Y">是</option>
+                        <option value="N">否</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="center">資料有效日期 <button style="border:2px red solid"
+                                                  id="efficientTimeQuote">引用</button></td>
+                <td>
+                    <input id="efficientTime" type="date">
+                </td>
+
+            </tr>
+
+            <tr>
+                <td class="center">聯絡窗口<button style="border:2px red solid" id="questionWindowQuote">引用</button>
+                </td>
+                <td>
+                    <button id="questionAnswerWindowBtn" onclick="questionAnswerWindowBtnClick(this)">&#x2b;</button>新增窗口
+                    <table>
+                        <tbody id="questionAnswerWindowTable"></tbody>
+                    </table>
+
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="center">附檔<button style="border:2px red solid"
+                                             id="questionWindowAttachQuote">引用</button></td>
+                <td>
+                    <button id="questionWindowAttachBtn" onclick="questionWindowAttachBtnClick(this)">&#x2b;</button>新增附檔
+                    <table>
+                        <tbody id="questionWindowAttachTable"></tbody>
+                    </table>
+
+                </td>
+
+            </tr>
+        </table>
+
+
+    </div>
+
+
+</div>

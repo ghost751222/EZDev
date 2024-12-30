@@ -1,0 +1,137 @@
+<div>
+    <span style="color:red">
+
+        {{if status=='S'}}
+            <!-- <span style="cursor:pointer;color:purple" onclick="cancelOffClick(this,  ${JSON.stringify(this)} )">&#9888;${applyTime}被[${applier}]申請下架&#10060;</span> -->
+            <span style="cursor:pointer;color:purple" onclick="cancelOffClick(this,  ${JSON.stringify(this)} )">&#9888;{{html applierUser(applyTime,applier)}}</span>
+        {{else status=='D'}}
+            <!--<span>&#9888;${closeDataTime}已被[${closeData}]下架</span> -->
+            <span>&#9888;{{html closeDataUser(closeDataTime,closeData)}}</span>
+        {{/if}}
+
+        <br/>
+
+
+        {{if isEdit=='Y'}}
+            <span>&#9888;{{html showEdit(lastUpdateTime,lastModifier)}}</span>
+        {{/if}}
+         <br/>
+
+
+        <span>{{html checkExpired(efficientTime,sectionId)}}</span>
+
+    </span>
+    <table>
+        <tr>
+            <td class="noBorder" style="white-space: nowrap;">
+                <h3>Q${sId}</span>:</h3>
+            </td>
+            <td class="noBorder">
+                <h3>${question}</h3>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="noBorder">A:</td>
+            <td class="noBorder" style="white-space:pre-wrap"> ${answer}</td>
+        </tr>
+    </table>
+
+
+</div>
+<div class="ellipsis">
+    <table class="sub-table">
+        <tr>
+            <td>關鍵字</td>
+            <td>${keyword}</td>
+        </tr>
+
+        <tr>
+            <td>有效日期</td>
+            <td>${efficientTime}</td>
+        </tr>
+
+
+        <tr>
+            <td>聯絡窗口</td>
+            <td>
+                <table class="inner-table">
+                    {{html templateRender("#questionAnswerWindowDisplayItem",questionAnswerWindows)}}
+                </table>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>附檔</td>
+            <td>
+                <table class="inner-table">
+                    {{html templateRender("#questionAnswerAttachDisplayItem",questionAnswerAttaches)}}
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>建立日期</td>
+            <td>${createTime}</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="background-color:#ececf4;text-align:left;white-space:normal">
+                申請下架原因:<br/>
+                {{if status=='S'}}
+                        ${disableReason}
+                {{/if}}
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="display: flex;justify-content:flex-end;height:30%">
+
+    {{if  page=='questionOpinionVerify'}}
+        <button class="sub-button" onclick="editClick(this,  ${JSON.stringify(this)} )">編輯</button>
+        <button class="sub-button" onclick="offClick(this, ${JSON.stringify(this)} )">下架</button>
+
+    {{else page=='questionAnswerVerify' }}
+             <button class="sub-button" onclick="editClick(this,  ${JSON.stringify(this)} )">編輯</button>
+            <button class="sub-button" onclick="relationClick(this,  ${JSON.stringify(this)}  )">新增補充說明</button>
+            <button class="sub-button" onclick="deleteClick( ${JSON.stringify(this)} )">刪除</button>
+             <button class="sub-button" onclick="offClick(this, ${JSON.stringify(this)} )">下架</button>
+
+    {{else page=='questionAnswer' || page=='questionAnswerEdit'}}
+
+        {{if role == 'B' || role=='D'}}
+            <button class="sub-button" onclick="editClick(this,  ${JSON.stringify(this)} )">編輯</button>
+            <button class="sub-button" onclick="deleteClick( ${JSON.stringify(this)} )">刪除</button>
+
+            {{if status=='K' || status=='A'}}
+                 <button class="sub-button" onclick="offClick(this, ${JSON.stringify(this)} )">下架</button>
+            {{else}}
+                <button class="sub-button" onclick="cancelOffClick(this,  ${JSON.stringify(this)} )">上架</button>
+            {{/if}}
+            <button class="sub-button" onclick="relationClick(this,  ${JSON.stringify(this)}  )">新增補充說明</button>
+        {{else role == 'E'}}
+            <button class="sub-button" onclick="editClick(this,  ${JSON.stringify(this)} )">編輯</button>
+            {{if status=='K' || status=='A'}}
+                     <button class="sub-button" onclick="offClick(this, ${JSON.stringify(this)} )">下架</button>
+            {{else}}
+                     <button class="sub-button" onclick="cancelOffClick(this,  ${JSON.stringify(this)} )">上架</button>
+            {{/if}}
+            <button class="sub-button" onclick="relationClick(this,  ${JSON.stringify(this)}  )">新增補充說明</button>
+    {{else role == 'C'}}
+        <button class="sub-button" onclick="editClick(this,  ${JSON.stringify(this)} )">編輯</button>
+        <button class="sub-button" onclick="applyOffClick(this, ${JSON.stringify(this)} )">申請下架</button>
+    {{/if}}
+
+{{else page=='questionAnswerDeleteList' }}
+    <button class="sub-button" onclick="cancelOffClick(this,  ${JSON.stringify(this)} )">上架</button>
+{{else page=='qqq'}}
+    <button class="sub-button" onclick="offClick(this, ${JSON.stringify(this)} )">下架</button>
+    <button class="sub-button" onclick="applyOffClick(this, ${JSON.stringify(this)} )">申請下架</button>
+{{else}}
+
+{{/if}}
+
+<button class="sub-button" onclick="historyClick(  ${JSON.stringify(this)}  )">檢視歷程異動</button>
+<button class="sub-button" onclick="moreClick(this)">更多...</button>
+
+</div>

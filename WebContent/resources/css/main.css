@@ -1,0 +1,8 @@
+  table.main-table,  table.main-table td {
+                      border: 2px solid #dedeef;
+                      border-collapse: collapse;
+                      background-color:#f1f1f1;
+                    }
+         table.main-table td.center{text-align: center;width:180px;white-space: nowrap;}
+         .main-button {padding: 8px 8px;text-align: center;font-size: 12px;margin: 4px 2px;cursor: pointer;}
+         .main-title{background-color: #6699cc;text-align:center;font-size:22px}

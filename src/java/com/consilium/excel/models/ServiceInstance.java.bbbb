@@ -1,0 +1,61 @@
+package com.consilium.excel.models;
+
+import com.consilium.domain.ServiceType;
+import com.consilium.service.ServiceItemService;
+import com.consilium.service.ServiceTypeService;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+@Component
+public class ServiceInstance implements InitializingBean {
+
+    @Autowired
+    ServiceTypeService serviceTypeService;
+
+    @Autowired
+    ServiceItemService serviceItemService;
+
+    private static ServiceInstance serviceInstance;
+
+    public static ServiceInstance getInstance() {
+
+        return serviceInstance;
+    }
+
+    public ArrayList<ServiceTypeObject> getTypeEnableList() throws SQLException {
+
+
+        List<ServiceType> list = serviceTypeService.findAllByState(1);
+        ArrayList<ServiceTypeObject> serviceTypeObjects = new ArrayList<>();
+
+        for (ServiceType s:list) {
+            ServiceTypeObject serviceTypeObject = new ServiceTypeObject(s.getTypeId());
+            serviceTypeObjects.add(serviceTypeObject);
+        }
+
+
+
+
+        return serviceTypeObjects;
+    }
+
+    public ArrayList<ServiceItemObject> getItemEnableList() {
+        return new ArrayList<>();
+    }
+
+    public ServiceTypeObject getTypeObject(String typeId) throws SQLException {
+        return new ServiceTypeObject(typeId);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        serviceInstance = this;
+    }
+}

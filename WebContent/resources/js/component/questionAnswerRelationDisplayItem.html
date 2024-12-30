@@ -1,0 +1,133 @@
+<div class="questionAnswerRelation">
+    <div>
+        <span style="color:purple">
+
+           {{if status=='D'}}
+              <!-- <span>&#9888;${closeDataTime}已被[${closeData}]下架</span>-->
+              <span>&#9888;{{html closeDataUser(closeDataTime,closeData)}}</span>
+           {{/if}}
+        </span>
+
+        <table>
+            <tr>
+                <td class="noBorder" style="white-space: nowrap;">
+                    <h3>Q${sId}</span>:</h3>
+                </td>
+                <td class="noBorder" style="white-space:pre-wrap"><h3>${question}</h3></td>
+            </tr>
+            <tr>
+                <td class="noBorder">A:</td>
+                <td class="noBorder" style="white-space:pre-wrap">${answer}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="ellipsis">
+        <table class="sub-table">
+            <tr>
+                <td>關鍵字</td>
+                <td>${keyword}</td>
+            </tr>
+
+            <tr>
+                <td>有效日期</td>
+                <td>${efficientTime}</td>
+            </tr>
+
+
+            <tr>
+                <td>狀態</td>
+                <td>
+                    {{if status=="K"}}
+                    知識上架
+                    {{else}}
+                    知識下架
+                    {{/if}}
+                </td>
+            </tr>
+            <tr>
+                <td>聯絡窗口</td>
+                <td>
+                    <table class="inner-table">
+                        {{html templateRender("#questionAnswerWindowDisplayItem",questionAnswerWindows)}}
+                    </table>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>附檔</td>
+                <td>
+                    <table class="inner-table">
+                        {{html templateRender("#questionAnswerAttachDisplayItem",questionAnswerAttaches)}}
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>建立日期</td>
+                <td>${createTime}</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="background-color:#ececf4;text-align:left;white-space:normal"
+                    align="left">
+                    <h3>待審核建議:</h3>
+                    {{if questionAnswerOpinions.length>0}}
+                    {{each questionAnswerOpinions}}
+                    {{if visible=='Y'}}
+                    <div style="width:100%">
+                        <span style="color:red;"> &#9888;${createTime}[${creator}]提出建議:</span>
+                        <br/>
+                        <span style="cursor: pointer;"
+                              onclick="visibleClick(this,  ${ JSON.stringify(this)}  )">${content}  &#10060;</span>
+                    </div>
+                    {{/if}}
+                    {{/each}}
+                    {{else}}
+                    <h5>無建議資料</h5>
+                    {{/if}}
+                    <button class="sub-button" style="float:right;color:red;"
+                            onclick="viewClick(this,  ${ JSON.stringify(this)}  )">檢視全部
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div style="display: flex;justify-content:flex-end;height:30%">
+
+        {{if page=='questionOpinionVerify'}}
+            <button class="sub-button" onclick="questionAnswerRelationEditClick(this,${ JSON.stringify(this.data)})">編輯</button>
+            <button class="sub-button" onclick="questionAnswerRelationDeleteClick(${ JSON.stringify(this.data)})">刪除</button>
+        {{else page=='questionAnswerVerify'}}
+            <!-- <button class="sub-button" onclick="questionAnswerRelationEditClick(this,${ JSON.stringify(this.data)})">編輯</button>
+                 <button class="sub-button" onclick="questionAnswerRelationSuggestClick(${ JSON.stringify(this.data)})">提出建議</button> -->
+            <button class="sub-button" onclick="questionAnswerRelationDeleteClick(${ JSON.stringify(this.data)})">刪除</button>
+        <button class="sub-button" onclick="questionAnswerRelationOffClick(this,${ JSON.stringify(this.data)})">下架</button>
+
+        {{else page=='questionAnswer' || page=='questionAnswerEdit'}}
+            {{if role == 'B' || role=='D'}}
+                <button class="sub-button" onclick="questionAnswerRelationEditClick(this,${ JSON.stringify(this.data)})">編輯</button>
+                <button class="sub-button" onclick="questionAnswerRelationSuggestClick(${ JSON.stringify(this.data)})">提出建議</button>
+                {{if status=='K'}}
+                <button class="sub-button" onclick="questionAnswerRelationOffClick(this,${ JSON.stringify(this.data)})">下架</button>
+                {{else}}
+                <button class="sub-button" onclick="questionAnswerRelationOnClick(this,${JSON.stringify(this.data)})">上架</button>
+                {{/if}}
+                <button class="sub-button" onclick="questionAnswerRelationDeleteClick(${ JSON.stringify(this.data)})">刪除</button>
+            {{else role == 'E'}}
+                <button class="sub-button" onclick="questionAnswerRelationEditClick(this,${ JSON.stringify(this.data)})">編輯</button>
+                <button class="sub-button" onclick="questionAnswerRelationSuggestClick(${ JSON.stringify(this.data)})">提出建議</button>
+                {{if status=='K'}}
+                <button class="sub-button" onclick="questionAnswerRelationOffClick(this,${ JSON.stringify(this.data)})">下架</button>
+                {{else}}
+                <button class="sub-button" onclick="questionAnswerRelationOnClick(this,${JSON.stringify(this.data)})">上架</button>
+                {{/if}}
+                <button class="sub-button" onclick="questionAnswerRelationDeleteClick(${ JSON.stringify(this.data)})">刪除</button>
+            {{else role == 'C'}}
+                <button class="sub-button" onclick="questionAnswerRelationSuggestClick(${ JSON.stringify(this.data)})">提出建議</button>
+            {{/if}}
+        {{else page=='questionAnswerDeleteList' }}
+            <button class="sub-button" onclick="questionAnswerRelationOnClick(this,${JSON.stringify(this.data)})">上架</button>
+        {{/if}}
+        <button class="sub-button" onclick="questionAnswerRelationMoreClick(this)">更多...</button>
+    </div>

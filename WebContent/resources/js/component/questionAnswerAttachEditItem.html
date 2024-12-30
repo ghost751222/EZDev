@@ -1,0 +1,11 @@
+<tr>
+  <td>
+    {{if sId}}
+      <input type="text" value="${fileName}" data-attachment="${JSON.stringify(this)}" readonly/>
+    {{else}}
+      <input type="file"/>
+    {{/if}}
+
+    <button onclick="questionAnswerAttachItemDeleteClick(this,${JSON.stringify(this)})">&#10060;</button>
+  </td>
+</tr>

@@ -1,0 +1,21 @@
+<tr>
+    <td style="vertical-align: top;width:50%">
+        {{html templateRender("#questionAnswerDisplayItem",this.data)}}
+    </td>
+
+    <td style="vertical-align: top;width:50%">
+        {{if questionAnswerRelations.length >0}}
+            {{each questionAnswerRelations }}
+                 {{html templateRender("#questionAnswerRelationDisplayItem",questionAnswerRelations[$index])}}
+               {{if questionAnswerRelations.length != $index+1 }}
+                  <hr style="width:100%"/>
+               {{/if}}
+
+            {{/each}}
+        {{else}}
+            <div style="background-color:#dedeef;border:1px solid black;">無補充說明</div>
+        {{/if}}
+
+
+    </td>
+</tr>
